@@ -1,0 +1,34 @@
+
+name: Deploy
+on:
+  push:
+    branch: release
+
+jobs:
+
+  production:
+    runs-on: target
+    steps:
+
+      - name: Docker Prune
+        run: sudo docker system prune -f
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Build docker image
+        run: sudo docker build . --build-arg DOT_ENV=$(cat ~/.env | base64 -w 0) --file Dockerfile --tag jeremyjaydan:latest
+
+      - name: Run docker container
+        run: |
+          sudo docker run -d --name=server-${{ github.sha }} -p 80 jeremyjaydan:latest
+          echo "port=$(sudo docker port $(sudo docker ps -ql) | awk -F: '{print $2}' | tr -d '\r\n[:space:]')" >> $GITHUB_ENV
+                    
+      - name: Reroute traffic
+        run: |
+          sudo sed -i "s/\(\b[0-9]\{4,8\}\b\)/$port/" /etc/nginx/sites-available/jeremyjaydan.conf
+          sudo systemctl reload nginx
+          
+      - name: Stop old production container(s)
+        run: |
+          sudo docker stop $(sudo docker ps -q --filter name=production-server | grep -v $(sudo docker ps -q --filter name=server-${{ github.sha }}))
