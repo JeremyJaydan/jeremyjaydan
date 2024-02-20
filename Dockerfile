@@ -13,4 +13,4 @@ RUN echo $DOT_ENV | base64 -d >> .env
 RUN echo "BASE64_DATE_STRING=$(date | base64)" >> .env
 
 RUN npm i && npm run build
-CMD npm run start
+CMD PORT=80 npm run start
