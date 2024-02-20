@@ -5,8 +5,11 @@ ENV APP_HOME /home/jeremy
 WORKDIR $APP_HOME
 COPY . .
 
+# use host .env
 ARG DOT_ENV
 RUN echo $DOT_ENV | base64 -d >> .env
+
+# random string for cache invalidation purposes in the application layer 
 RUN echo "BASE64_DATE_STRING=$(date | base64)" >> .env
 
 RUN npm i && npm run build
