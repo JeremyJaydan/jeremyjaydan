@@ -31,4 +31,4 @@ jobs:
           
       - name: Stop old production container(s)
         run: |
-          sudo docker stop $(sudo docker ps -q --filter name=production-server | grep -v $(sudo docker ps -q --filter name=server-${{ github.sha }}))
+          sudo docker stop $(sudo docker ps -q --filter name=server | grep -v $(sudo docker ps -q --filter name=server-${{ github.sha }}))
