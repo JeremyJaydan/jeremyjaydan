@@ -5,6 +5,9 @@
       body {
         padding: 32px;
       }
+      .info{
+        user-select: none;
+      }
       h1 {
         color: #333;
       }
@@ -32,15 +35,17 @@
     </style>
   `,
   body: /*html*/ `
-    <h1>JeremyJaydan</h1>
-    <p>Freelance web developer and designer from Perth, Australia.</p>
-    <section>
-      <a class="cta" href="https://github.com/JeremyJaydan" target="_blank">
-        <span>GitHub.com/JeremyJaydan</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" viewBox="0 0 256 256"><path d="M224,104a8,8,0,0,1-16,0V59.32l-66.33,66.34a8,8,0,0,1-11.32-11.32L196.68,48H152a8,8,0,0,1,0-16h64a8,8,0,0,1,8,8Zm-40,24a8,8,0,0,0-8,8v72H48V80h72a8,8,0,0,0,0-16H48A16,16,0,0,0,32,80V208a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V136A8,8,0,0,0,184,128Z"></path></svg>
-      </a>
-    </section>
-    <i>a blog could be here soon..</i>
+    <div class="info">
+      <h1>JeremyJaydan</h1>
+      <p>Freelance web developer and designer from Perth, Australia.</p>
+      <section>
+        <a class="cta" href="https://github.com/JeremyJaydan" target="_blank">
+          <span>GitHub.com/JeremyJaydan</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" viewBox="0 0 256 256"><path d="M224,104a8,8,0,0,1-16,0V59.32l-66.33,66.34a8,8,0,0,1-11.32-11.32L196.68,48H152a8,8,0,0,1,0-16h64a8,8,0,0,1,8,8Zm-40,24a8,8,0,0,0-8,8v72H48V80h72a8,8,0,0,0,0-16H48A16,16,0,0,0,32,80V208a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V136A8,8,0,0,0,184,128Z"></path></svg>
+        </a>
+      </section>
+      <i>a blog could be here soon..</i>
+    </div>
     <artsy-canvas-background class="bg"></artsy-canvas-background>
   `
 }) %>
