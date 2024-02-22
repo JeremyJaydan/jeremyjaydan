@@ -57,6 +57,8 @@ export default class ArtsyCanvasBackground extends HTMLElement {
     let speedX = Math.random() * 2 - 1;
     let speedY = Math.random() * 2 - 1;
     
+    const ai = Math.random() < 0.1;
+    
     const colorData = {
       r: Math.random() * 255,
       g: Math.random() * 255,
@@ -88,10 +90,9 @@ export default class ArtsyCanvasBackground extends HTMLElement {
       x += speedX;
       y += speedY;
       
-      let dx = x - this.mouse.x;
-      let dy = y - this.mouse.y;
-      
-      let distance = Math.sqrt(dx * dx + dy * dy);
+      let mx = x - this.mouse.x;
+      let my = y - this.mouse.y;
+      let distance = Math.sqrt(mx * mx + my * my);
       
       if(distance < 100){
         ctx.beginPath();
@@ -102,13 +103,70 @@ export default class ArtsyCanvasBackground extends HTMLElement {
       }
       
       if(distance < 100 && this.mouse.down){
-        x -= dx * 0.05;
-        y -= dy * 0.05;
+        x -= mx * 0.02;
+        y -= my * 0.02;
+      }
+      
+      if(ai){
+        let particlesNearby = 0;
+        for(let i = 0; i < this.particles.length; i++){
+          
+          const particle = this.particles[i];
+          
+          if(particle === this){
+            continue;
+          }
+          
+          const px = particle.getX();
+          const py = particle.getY();
+          
+          const d2 = Math.sqrt((px - x) * (px - x) + (py - y) * (py - y));
+          
+          if(d2 < 100){
+            
+            particlesNearby++;
+            
+            if(particlesNearby > 5){
+              break;
+            }
+            
+            // drag particle
+            particle.setX(particle.getX() - (px - x) * 0.02);
+            particle.setY(particle.getY() - (py - y) * 0.02);
+            
+            ctx.beginPath();
+            ctx.moveTo(px, py);
+            ctx.lineTo(x, y);
+            ctx.strokeStyle = fillStyle;
+            ctx.stroke();
+            
+            // drag particle
+            particle.setX(particle.getX() - (px - x) * 0.02);
+            particle.setY(particle.getY() - (py - y) * 0.02);
+            
+            // randomly change speed
+            if(Math.random() < 0.005){
+              particle.setSpeedX(Math.random() * 4 - 1);
+              particle.setSpeedY(Math.random() * 4 - 1);
+            }
+                        
+          }
+          
+        }
       }
       
     }
     
-    return { draw };
+    const getX = () => x;
+    const getY = () => y;
+    const setX = _x => x = _x;
+    const setY = _y => y = _y;
+    const setSpeedX = _speedX => speedX = _speedX;
+    const setSpeedY = _speedY => speedY = _speedY;
+    const setRadius = _radius => radius = _radius;
+    const getRadius = () => radius;
+    
+    return { draw, ai, getX, getY, setX, setY, setSpeedX, setSpeedY, setRadius, getRadius };
   }
   
   #syncCanvasSize(){
