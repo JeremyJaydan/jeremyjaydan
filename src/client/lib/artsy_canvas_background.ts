@@ -58,6 +58,7 @@ export default class ArtsyCanvasBackground extends HTMLElement {
     let speedY = Math.random() * 2 - 1;
     
     const ai = Math.random() < 0.1;
+    const still = Math.random() < 0.2;
     
     const colorData = {
       r: Math.random() * 255,
@@ -87,8 +88,10 @@ export default class ArtsyCanvasBackground extends HTMLElement {
         speedY = -speedY;
       }
       
-      x += speedX;
-      y += speedY;
+      if(!still){
+        x += speedX;
+        y += speedY;
+      }
       
       let mx = x - this.mouse.x;
       let my = y - this.mouse.y;
@@ -126,7 +129,7 @@ export default class ArtsyCanvasBackground extends HTMLElement {
             
             particlesNearby++;
             
-            if(particlesNearby > 5){
+            if(particlesNearby > 5 && !still){
               break;
             }
             
