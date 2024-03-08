@@ -21,8 +21,8 @@ export default class ArtsyCanvasBackground extends HTMLElement {
     setTimeout(this.#init.bind(this), 1);
   }
   
-  getCanvas(): HTMLCanvasElement {
-    return this.shadowRoot!.querySelector('canvas') as HTMLCanvasElement;
+  getCanvas(){
+    return this.shadowRoot.querySelector('canvas');
   }
   
   #init(){
@@ -30,7 +30,7 @@ export default class ArtsyCanvasBackground extends HTMLElement {
     
     const self = this;
     const canvas = this.getCanvas();
-    const ctx = this.getCanvas().getContext('2d')!;
+    const ctx = this.getCanvas().getContext('2d');
     
     (function draw(){
       
@@ -178,17 +178,17 @@ export default class ArtsyCanvasBackground extends HTMLElement {
     canvas.height = window.innerHeight;
   }
   
-  #onWindowResize(event: Event){
+  #onWindowResize(event){
     this.#syncCanvasSize()
   }
   
-  #onWindowMouseMove(event: MouseEvent){
+  #onWindowMouseMove(event){
     this.mouse.x = event.pageX;
     this.mouse.y = event.pageY;
   }
   
   #render(){
-    this.shadowRoot!.innerHTML = /*html*/ `
+    this.shadowRoot.innerHTML = /*html*/ `
     
       <style>
         canvas{}
