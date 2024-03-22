@@ -11,22 +11,59 @@
       }
     </style>
     <style>
+      
+      @media(prefers-color-scheme: dark) {
+        body{
+          background-color: #161616;
+          text-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+          color: #fff;
+        }
+        h1{
+          color: #fff;
+        }
+        a{
+          color: #488ce8;
+        }
+        .cta svg{
+          fill: #488ce8;
+        }
+        p{
+          color: #c1c1c1;
+        }
+        i{
+          color: #646464;
+        }
+      }
+      
+      @media(prefers-color-scheme: light) {
+        body{
+          background-color: #f7f7f7;
+          text-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+          color: #333;
+        }
+        h1{
+        color: #333;
+        }
+        a{
+          color: #2e6cc1;
+        }
+        .cta svg{
+          fill: #2e6cc1;
+        }
+        p{
+          color: #666;
+        }
+        i{
+          color: #999;
+        }
+      }
       body {
         padding: 32px;
-        text-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
         -webkit-user-select: none;
         user-select: none;
         cursor: default;
       }
-      h1 {
-        color: #333;
-      }
-      p {
-        color: #666;
-      }
-      i {
-        color: #999;
-      }
+
       section{
         margin-bottom: 16px;
       }

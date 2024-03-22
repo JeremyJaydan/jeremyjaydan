@@ -191,7 +191,9 @@ export default class ArtsyCanvasBackground extends HTMLElement {
     this.shadowRoot.innerHTML = /*html*/ `
     
       <style>
-        canvas{}
+        canvas{
+          background: transparent;
+        }
       </style>
     
       <canvas></canvas>
